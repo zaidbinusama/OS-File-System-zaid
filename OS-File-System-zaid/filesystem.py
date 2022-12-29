@@ -54,7 +54,7 @@ def thread_function(a, username):
         a[1] = a[1].replace(",", "")
         a[2] = a[2].replace(",", "")
         a[2] = a[2].replace("\n", "")
-        openFile(a[1], 'w', a[2])
+        openFile(a[1], 'w', a[2], 0, 0, username)
     elif a[0] == 'write_at':
         a[1] = a[1].replace("<", "")
         a[1] = a[1].replace(">", "")
@@ -199,6 +199,7 @@ def openFile(filename, mode, content='', startingIndex=0, size=0, user=''):
                 if filename not in filesInUse:
                     if writer['username'] == '':
                         writer["username"] = user
+                        print(writer['username'])
                         file = open(filename, "r")
                         filesInUse.append(file)
                         contents = file.read()
@@ -221,8 +222,8 @@ def openFile(filename, mode, content='', startingIndex=0, size=0, user=''):
                         file.close()
                         clientInfo["message"] = "File written to successfully!"
                     else:
-                        clientInfo["message"] = "File is in use by " + writer
-                        print("File is in use by " + writer)    
+                        clientInfo["message"] = "File is in use by " + writer["username"]
+                        print("File is in use by " + writer["username"])    
                 else:
                     print(filesInUse)
                     print("File is in use, cannot be written to!")
@@ -230,6 +231,7 @@ def openFile(filename, mode, content='', startingIndex=0, size=0, user=''):
 
             case 'r':
                 if writer['username'] == '':
+                    print(writer['username'])
                     filename = open(filename, "r")
                     filesInUse.append(fileName)
                     clientInfo["message"] =("Contents of " + fileName +
@@ -237,7 +239,7 @@ def openFile(filename, mode, content='', startingIndex=0, size=0, user=''):
                     print(clientInfo["message"])
                     filename.close()
                 else:
-                    clientInfo["message"] = "File is in use by " + writer
+                    clientInfo["message"] = "File is in use by " + writer["username"]
             case 'x':
                 file = open(filename, "r")
                 filesInUse.append(file)
