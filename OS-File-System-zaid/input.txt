@@ -1,0 +1,12 @@
+create file1.txt
+makeDir directory1 
+changeDir directory1 
+changeDir ..
+open <file1.txt,r> 
+close <file1.txt> 
+write_to_file <file1.txt>, text to write 
+write_at <file1.txt>, File Text, 25
+read_from_file <file1.txt>, 10, 15
+truncate_file file1.txt 4
+show
+mov file1.txt directory1
